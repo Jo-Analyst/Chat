@@ -7,8 +7,8 @@ import 'package:chat/core/services/auth/auth_service.dart';
 class AuthMockService implements AuthService {
   static Map<String, ChatUser> _users = {};
   static ChatUser? _currentUser;
-  static MultiStreamController<ChatUser>? _controller;
-  static final _userStream = Stream<ChatUser>.multi((controller) {
+  static MultiStreamController<ChatUser?>? _controller;
+  static final _userStream = Stream<ChatUser?>.multi((controller) {
     _controller = controller;
     _updateUser(null);
   });
@@ -25,13 +25,13 @@ class AuthMockService implements AuthService {
     String name,
     String email,
     String password,
-    File image,
+    File? image,
   ) async {
     final newUser = ChatUser(
       id: Random().nextDouble().toString(),
       name: name,
       email: email,
-      imageURL: image.path,
+      imageURL: image?.path ?? "/assets/images/...",
     );
 
     _users.putIfAbsent(email, () => newUser);
@@ -48,6 +48,6 @@ class AuthMockService implements AuthService {
 
   static void _updateUser(ChatUser? user) {
     _currentUser = user;
-    _controller?.add(_currentUser!);
+    _controller?.add(_currentUser);
   }
 }
