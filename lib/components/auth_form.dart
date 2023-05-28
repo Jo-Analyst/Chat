@@ -87,7 +87,7 @@ class _AuthFormState extends State<AuthForm> {
               Row(
                 children: [
                   SizedBox(
-                    width: 291,
+                    width: 281,
                     child: TextFormField(
                       key: const ValueKey("password"),
                       initialValue: _formData.password,
@@ -104,16 +104,16 @@ class _AuthFormState extends State<AuthForm> {
                       },
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPasswordHide = !isPasswordHide;
-                      });
-                    },
-                    icon: Icon(isPasswordHide
-                        ? Icons.visibility
-                        : Icons.visibility_off),
-                  ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       isPasswordHide = !isPasswordHide;
+                  //     });
+                  //   },
+                  //   icon: Icon(isPasswordHide
+                  //       ? Icons.visibility
+                  //       : Icons.visibility_off),
+                  // ),
                 ],
               ),
               const SizedBox(height: 12),
