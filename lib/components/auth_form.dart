@@ -87,7 +87,7 @@ class _AuthFormState extends State<AuthForm> {
               Row(
                 children: [
                   SizedBox(
-                    width: 281,
+                    width: 335,
                     child: TextFormField(
                       key: const ValueKey("password"),
                       initialValue: _formData.password,
