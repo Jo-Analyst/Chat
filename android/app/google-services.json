@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "335379922074",
+    "project_id": "jodev-chat",
+    "storage_bucket": "jodev-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335379922074:android:44fe619d1bced5d0b1f323",
+        "android_client_info": {
+          "package_name": "br.com.jodev.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335379922074-ii7hemmdcjg6trjd4guh00n0rmiaedfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxkGitBmUOOGaMbwZCTz1voZ7DFfrDzmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335379922074-ii7hemmdcjg6trjd4guh00n0rmiaedfd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
