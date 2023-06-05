@@ -27,7 +27,7 @@ class _AuthFormState extends State<AuthForm> {
   void _showError(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(msg),
-      backgroundColor: Theme.of(context).errorColor,
+      backgroundColor: Colors.red,
     ));
   }
 

@@ -20,11 +20,11 @@ class ChatPage extends StatelessWidget {
                 Icons.more_vert,
                 color: Theme.of(context).primaryIconTheme.color,
               ),
-              items: [
+              items: const [
                 DropdownMenuItem(
                   value: "logout",
                   child: Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.exit_to_app,
                         color: Colors.black87,
@@ -70,9 +70,9 @@ class ChatPage extends StatelessWidget {
         centerTitle: true,
         title: const Text("JODEV Chat"),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
-          children: const [
+          children: [
             Expanded(
               child: Messages(),
             ),
