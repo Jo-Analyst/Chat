@@ -36,7 +36,9 @@ class ChatPage extends StatelessWidget {
                 )
               ],
               onChanged: (value) {
-                if (value == "logout") AuthService().logout();
+                if (value == "logout") {
+                  AuthService().logout();
+                }
               },
             ),
           ),

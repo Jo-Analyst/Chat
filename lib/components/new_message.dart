@@ -28,24 +28,24 @@ class _NewMessageState extends State<NewMessage> {
       children: [
         Expanded(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.only(left: 10),
             child: TextField(
-              controller: _messageController,
-              onChanged: (msg) => setState(() => _message = msg),
-              decoration: const InputDecoration(
-                labelText: "Enviar Mensagem...",
+                controller: _messageController,
+                onChanged: (msg) => setState(() => _message = msg),
+                decoration: const InputDecoration(
+                  labelText: 'Enviar mensagem...',
+                ),
+                onSubmitted: (_) {
+                  if (_message.trim().isNotEmpty) {
+                    _sendMessage();
+                  }
+                },
               ),
-              onSubmitted: (_) {
-                if (_message.trim().isNotEmpty) {
-                  _sendMessage();
-                }
-              },
-            ),
           ),
-        ),
+          ),
         IconButton(
-          onPressed: _message.trim().isEmpty ? null : _sendMessage,
           icon: const Icon(Icons.send),
+          onPressed: _message.trim().isEmpty ? null : _sendMessage,
         ),
       ],
     );

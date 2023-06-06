@@ -18,7 +18,6 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _formData = AuthFormData();
-  bool isPasswordHide = true;
 
   void _handleImagePick(File image) {
     _formData.image = image;
@@ -27,7 +26,7 @@ class _AuthFormState extends State<AuthForm> {
   void _showError(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(msg),
-      backgroundColor: Colors.red,
+      backgroundColor: Theme.of(context).colorScheme.error,
     ));
   }
 
@@ -84,37 +83,20 @@ class _AuthFormState extends State<AuthForm> {
                   return null;
                 },
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 335,
-                    child: TextFormField(
-                      key: const ValueKey("password"),
-                      initialValue: _formData.password,
-                      onChanged: (password) => _formData.password = password,
-                      obscureText: isPasswordHide ? true : false,
-                      decoration: const InputDecoration(labelText: "Senha"),
-                      validator: (value) {
-                        final password = value ?? "";
-                        if (password.trim().length < 6) {
-                          return "Senha deve ter no mínimo 6 caracteres.";
-                        }
+              TextFormField(
+                key: const ValueKey("password"),
+                initialValue: _formData.password,
+                onChanged: (password) => _formData.password = password,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: "Senha"),
+                validator: (value) {
+                  final password = value ?? "";
+                  if (password.trim().length < 6) {
+                    return "Senha deve ter no mínimo 6 caracteres.";
+                  }
 
-                        return null;
-                      },
-                    ),
-                  ),
-                  // IconButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       isPasswordHide = !isPasswordHide;
-                  //     });
-                  //   },
-                  //   icon: Icon(isPasswordHide
-                  //       ? Icons.visibility
-                  //       : Icons.visibility_off),
-                  // ),
-                ],
+                  return null;
+                },
               ),
               const SizedBox(height: 12),
               ElevatedButton(
