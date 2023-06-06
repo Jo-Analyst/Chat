@@ -14,9 +14,9 @@ class MessageBubble extends StatelessWidget {
     super.key,
   });
 
-  Widget _showUserImage(String imageUrl) {
+  Widget _showUserImage(String imageURL) {
     ImageProvider? provider;
-    final uri = Uri.parse(imageUrl);
+    final uri = Uri.parse(imageURL);
     if (uri.path.contains(_defaultImage)) {
       provider = const AssetImage(_defaultImage);
     } else if (uri.scheme.contains("http")) {
@@ -90,7 +90,7 @@ class MessageBubble extends StatelessWidget {
           top: 0,
           left: belongsToCurrentUser ? null : 165,
           right: belongsToCurrentUser ? 165 : null,
-          child: _showUserImage(message.userImageUrl),
+          child: _showUserImage(message.userimageURL),
         ),
       ],
     );
