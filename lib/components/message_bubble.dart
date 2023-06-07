@@ -90,7 +90,7 @@ class MessageBubble extends StatelessWidget {
           top: 0,
           left: belongsToCurrentUser ? null : 165,
           right: belongsToCurrentUser ? 165 : null,
-          child: _showUserImage(message.userimageURL),
+          child: _showUserImage(message.userImageURL),
         ),
       ],
     );
