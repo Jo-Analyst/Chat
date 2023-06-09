@@ -1,6 +1,5 @@
-// ignore_for_file: file_names
-
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -8,8 +7,8 @@ class UserImagePicker extends StatefulWidget {
   final void Function(File image) onImagePick;
 
   const UserImagePicker({
-    required this.onImagePick,
     super.key,
+    required this.onImagePick,
   });
 
   @override
@@ -47,18 +46,17 @@ class _UserImagePickerState extends State<UserImagePicker> {
         ),
         TextButton(
           onPressed: _pickImage,
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.image,
-                color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(width: 10),
-              const Text("Adicionar Imagem"),
+              SizedBox(width: 10),
+              Text('Adicionar Imagem'),
             ],
           ),
-        )
+        ),
       ],
     );
   }

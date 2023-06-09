@@ -1,5 +1,5 @@
 import 'package:chat/core/models/chat_notification.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ChatNotificationService with ChangeNotifier {
   final List<ChatNotification> _items = [];

@@ -1,8 +1,10 @@
+// import 'dart:math';
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
+// import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
-import 'package:chat/core/services/notifications/chat_notification_service.dart';
-import 'package:chat/pages/notifcation_page.dart';
+import 'package:chat/core/services/notification/chat_notification_service.dart';
+import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Cod3r Chat'),
         actions: [
           DropdownButtonHideUnderline(
             child: DropdownButton(
@@ -22,7 +25,7 @@ class ChatPage extends StatelessWidget {
               ),
               items: const [
                 DropdownMenuItem(
-                  value: "logout",
+                  value: 'logout',
                   child: Row(
                     children: [
                       Icon(
@@ -30,13 +33,13 @@ class ChatPage extends StatelessWidget {
                         color: Colors.black87,
                       ),
                       SizedBox(width: 10),
-                      Text("Sair")
+                      Text('Sair'),
                     ],
                   ),
-                )
+                ),
               ],
               onChanged: (value) {
-                if (value == "logout") {
+                if (value == 'logout') {
                   AuthService().logout();
                 }
               },
@@ -45,6 +48,7 @@ class ChatPage extends StatelessWidget {
           Stack(
             children: [
               IconButton(
+                icon: const Icon(Icons.notifications),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) {
@@ -52,33 +56,30 @@ class ChatPage extends StatelessWidget {
                     }),
                   );
                 },
-                icon: const Icon(Icons.notifications),
               ),
               Positioned(
                 top: 5,
                 right: 5,
                 child: CircleAvatar(
-                  backgroundColor: Colors.red.shade800,
                   maxRadius: 10,
+                  backgroundColor: Colors.red.shade800,
                   child: Text(
-                    "${Provider.of<ChatNotificationService>(context).itemsCount}",
-                    style: const TextStyle(fontSize: 12),
+                    '${Provider.of<ChatNotificationService>(context).itemsCount}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],
-        centerTitle: true,
-        title: const Text("JODEV Chat"),
       ),
       body: const SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: Messages(),
-            ),
-            NewMessage()
+            Expanded(child: Messages()),
+            NewMessage(),
           ],
         ),
       ),
@@ -88,12 +89,10 @@ class ChatPage extends StatelessWidget {
       //     Provider.of<ChatNotificationService>(
       //       context,
       //       listen: false,
-      //     ).add(
-      //       ChatNotification(
-      //         title: "+ 1 Notificação",
-      //         body: Random().nextDouble().toString(),
-      //       ),
-      //     );
+      //     ).add(ChatNotification(
+      //       title: 'Mais uma notificação!',
+      //       body: Random().nextDouble().toString(),
+      //     ));
       //   },
       // ),
     );

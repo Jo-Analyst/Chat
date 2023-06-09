@@ -28,11 +28,7 @@ class AuthFirebaseService implements AuthService {
 
   @override
   Future<void> signup(
-    String name,
-    String email,
-    String password,
-    File? image,
-  ) async {
+      String name, String email, String password, File? image) async {
     final auth = FirebaseAuth.instance;
     UserCredential credential = await auth.createUserWithEmailAndPassword(
       email: email,
@@ -41,19 +37,24 @@ class AuthFirebaseService implements AuthService {
 
     if (credential.user == null) return;
 
-    final imageName = "${credential.user!.uid}.jpg";
-    final imageURL = await _uploadUserImage(image, imageName);
+    // 1. Upload da foto do usuário
+    final imageName = '${credential.user!.uid}.jpg';
+    final imageUrl = await _uploadUserImage(image, imageName);
 
+    // 2. atualizar os atributos do usuário
     await credential.user?.updateDisplayName(name);
-    await credential.user?.updatePhotoURL(imageURL);
+    await credential.user?.updatePhotoURL(imageUrl);
 
-    await _saveChatUser(_toChatUser(credential.user!, imageURL));
+    // 3. salvar usuário no banco de dados (opcional)
+    await _saveChatUser(_toChatUser(credential.user!, imageUrl));
   }
 
   @override
   Future<void> login(String email, String password) async {
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   @override
@@ -72,21 +73,21 @@ class AuthFirebaseService implements AuthService {
 
   Future<void> _saveChatUser(ChatUser user) async {
     final store = FirebaseFirestore.instance;
-    final docRef = store.collection("users").doc(user.id);
+    final docRef = store.collection('users').doc(user.id);
 
     return docRef.set({
-      "name": user.name,
-      "email": user.email,
-      "imageURL": user.imageURL,
+      'name': user.name,
+      'email': user.email,
+      'imageUrl': user.imageUrl,
     });
   }
 
-  static ChatUser _toChatUser(User user, [String? imageURL]) {
+  static ChatUser _toChatUser(User user, [String? imageUrl]) {
     return ChatUser(
       id: user.uid,
       name: user.displayName ?? user.email!.split('@')[0],
       email: user.email!,
-      imageURL: imageURL ?? user.photoURL ?? 'assets/images/avatar.png',
+      imageUrl: imageUrl ?? user.photoURL ?? 'assets/images/avatar.png',
     );
   }
 }

@@ -6,7 +6,7 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +16,7 @@ class LoadingPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "Carregando...",
+              'Carregando...',
               style: TextStyle(
                 color: Theme.of(context).primaryTextTheme.titleLarge?.color,
               ),

@@ -4,7 +4,7 @@ import 'package:chat/core/models/chat_message.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  static const _defaultImage = "assets/images/avatar.png";
+  static const _defaultImage = 'assets/images/avatar.png';
   final ChatMessage message;
   final bool belongsToCurrentUser;
 
@@ -14,12 +14,13 @@ class MessageBubble extends StatelessWidget {
     super.key,
   });
 
-  Widget _showUserImage(String imageURL) {
+  Widget _showUserImage(String imageUrl) {
     ImageProvider? provider;
-    final uri = Uri.parse(imageURL);
+    final uri = Uri.parse(imageUrl);
+
     if (uri.path.contains(_defaultImage)) {
       provider = const AssetImage(_defaultImage);
-    } else if (uri.scheme.contains("http")) {
+    } else if (uri.scheme.contains('http')) {
       provider = NetworkImage(uri.toString());
     } else {
       provider = FileImage(File(uri.toString()));
@@ -43,7 +44,7 @@ class MessageBubble extends StatelessWidget {
               decoration: BoxDecoration(
                 color: belongsToCurrentUser
                     ? Colors.grey.shade300
-                    : Theme.of(context).colorScheme.primary,
+                    : Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(12),
                   topRight: const Radius.circular(12),
@@ -90,7 +91,7 @@ class MessageBubble extends StatelessWidget {
           top: 0,
           left: belongsToCurrentUser ? null : 165,
           right: belongsToCurrentUser ? 165 : null,
-          child: _showUserImage(message.userImageURL),
+          child: _showUserImage(message.userImageUrl),
         ),
       ],
     );

@@ -15,25 +15,31 @@ class _AuthPageState extends State<AuthPage> {
 
   Future<void> _handleSubmit(AuthFormData formData) async {
     try {
+      if (!mounted) return;
       setState(() => _isLoading = true);
+
       if (formData.isLogin) {
-        // login
+        // Login
         await AuthService().login(
           formData.email,
           formData.password,
         );
       } else {
-        // cadastro
+        // Signup
         await AuthService().signup(
           formData.name,
           formData.email,
-          formData.email,
+          formData.password,
           formData.image,
         );
       }
     } catch (error) {
-      // error
+      // Tratar erro!
     } finally {
+      if (!mounted) {
+        // ignore: control_flow_in_finally
+        return;
+      }
       setState(() => _isLoading = false);
     }
   }
@@ -41,7 +47,7 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Stack(
         children: [
           Center(
@@ -57,7 +63,7 @@ class _AuthPageState extends State<AuthPage> {
               child: const Center(
                 child: CircularProgressIndicator(),
               ),
-            )
+            ),
         ],
       ),
     );
