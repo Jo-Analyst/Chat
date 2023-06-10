@@ -36,10 +36,8 @@ class _AuthPageState extends State<AuthPage> {
     } catch (error) {
       // Tratar erro!
     } finally {
-      if (!mounted) {
-        // ignore: control_flow_in_finally
-        return;
-      }
+      // ignore: control_flow_in_finally
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }

@@ -23,24 +23,25 @@ class ChatNotificationService with ChangeNotifier {
     notifyListeners();
   }
 
-  // Push Notification
+  // Push Notifications
   Future<void> init() async {
     await _configureForeground();
   }
 
-  Future<bool> get _isAuthorirized async {
+  Future<bool> get _isAuthorized async {
     final messaging = FirebaseMessaging.instance;
-    final setting = await messaging.requestPermission();
-    return setting.authorizationStatus == AuthorizationStatus.authorized;
+    final settings = await messaging.requestPermission();
+    return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 
   Future<void> _configureForeground() async {
-    if (await _isAuthorirized) {
+    if (await _isAuthorized) {
       FirebaseMessaging.onMessage.listen((msg) {
         if (msg.notification == null) return;
+
         add(ChatNotification(
-          title: msg.notification!.title ?? "Não informado!",
-          body: msg.notification!.body ?? "Não informado!",
+          title: msg.notification!.title ?? 'Não informado!',
+          body: msg.notification!.body ?? 'Não informado!',
         ));
       });
     }
