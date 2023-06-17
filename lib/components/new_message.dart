@@ -19,6 +19,9 @@ class _NewMessageState extends State<NewMessage> {
     if (user != null) {
       await ChatService().save(_message, user);
       _messageController.clear();
+      setState(() {
+        _message = '';
+      });
     }
   }
 
@@ -27,17 +30,20 @@ class _NewMessageState extends State<NewMessage> {
     return Row(
       children: [
         Expanded(
-          child: TextField(
-            controller: _messageController,
-            onChanged: (msg) => setState(() => _message = msg),
-            decoration: const InputDecoration(
-              labelText: 'Enviar mensagem...',
+          child: Container(
+            margin: const EdgeInsets.only(left: 10),
+            child: TextField(
+              controller: _messageController,
+              onChanged: (msg) => setState(() => _message = msg),
+              decoration: const InputDecoration(
+                labelText: 'Enviar mensagem...',
+              ),
+              onSubmitted: (_) {
+                if (_message.trim().isNotEmpty) {
+                  _sendMessage();
+                }
+              },
             ),
-            onSubmitted: (_) {
-              if (_message.trim().isNotEmpty) {
-                _sendMessage();
-              }
-            },
           ),
         ),
         IconButton(
